@@ -3,4 +3,5 @@ database.setup()
 
 return {
   require("config.keybind.extra.git"),
+  require("config.keybind.extra.mail"),
 }

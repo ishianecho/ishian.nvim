@@ -15,7 +15,6 @@ return {
   { "<leader>g", group = "Git" },
   { "<leader>gh", group = "Github" },
   { "<leader>h", group = "Hunks" },
-  { "<leader>m", group = "Metals" },
   { "<leader>p", group = "Pin" },
   { "<leader>P", group = "Projects" },
   { "<leader>R", group = "Rest API (only ft=http)" },
