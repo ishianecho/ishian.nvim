@@ -3,6 +3,7 @@ local M = {}
 function M.setup()
   require("config.settings.autocmds.bigfile").setup()
   require("config.settings.autocmds.goimpl").setup()
+  require("config.settings.autocmds.image").setup()
   require("config.settings.autocmds.indent").setup()
   require("config.settings.autocmds.kitty").setup()
   require("config.settings.autocmds.pairs").setup()
