@@ -54,7 +54,9 @@ end
 local function resize_or_terminal(dir)
   local amount = 2
   local horizontal = dir == "h" or dir == "l"
-  local fills_axis = horizontal and vim.api.nvim_win_get_width(0) == vim.o.columns or is_full_height()
+  local fills_axis = horizontal
+    and vim.api.nvim_win_get_width(0) == vim.o.columns
+    or (not horizontal and is_full_height())
   if fills_axis then
     if vim.env.WT_SESSION then
       send_shifted_key(({ h = 37, j = 40, k = 38, l = 39 })[dir])
