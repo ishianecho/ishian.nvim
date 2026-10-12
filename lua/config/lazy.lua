@@ -20,9 +20,8 @@ end
 function M.load_plugins()
   require("lazy").setup({
     spec = {
-      { import = "plugins" },
       { import = "plugins/langs" },
-      { import = "plugins/enhancement" },
+      { import = "plugins/editing" },
       { import = "plugins/ui" },
       { import = "plugins/extra" },
     },

@@ -39,7 +39,7 @@ function M.setup()
   M.add({
     require("config.keybind.general"),
     require("config.keybind.langs"),
-    require("config.keybind.enhancement"),
+    require("config.keybind.editing"),
     require("config.keybind.extra"),
   })
 end

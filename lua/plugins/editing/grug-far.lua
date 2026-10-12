@@ -4,7 +4,7 @@ return {
     lazy = true,
     cmd = { "GrugFar", "GrugFarWithin" },
     config = function()
-      require("config.enhancement.grug-far").setup()
+      require("config.editing.grug-far").setup()
     end,
   },
 }

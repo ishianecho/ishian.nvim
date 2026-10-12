@@ -2,7 +2,7 @@ return {
   {
     "windwp/nvim-autopairs",
     config = function()
-      require("config.enhancement.autopairs").setup()
+      require("config.editing.autopairs").setup()
     end,
   },
 }
