@@ -11,7 +11,7 @@ function M.setup()
   vim.g.skip_default_snippet_tab = true
   vim.g.bullets_set_mappings = 0
   vim.cmd("BulletsModeOn")
-  require("which-key").add({
+  require("config.keybind").add({
     {
       group = "markdown autolist",
 

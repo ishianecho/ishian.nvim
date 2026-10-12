@@ -1,46 +1,46 @@
 local M = {}
 
+local function apply(entry, parent)
+  if type(entry.cond) == "function" and not entry.cond() then
+    return
+  end
+
+  local mode = entry.mode or parent.mode
+  local buffer = entry.buffer or parent.buffer
+  local nowait = entry.nowait or parent.nowait
+
+  local lhs, rhs = entry[1], entry[2]
+  if type(lhs) == "string" and rhs ~= nil then
+    vim.keymap.set(mode or "n", lhs, rhs, {
+      buffer = buffer,
+      desc = entry.desc,
+      nowait = nowait,
+      silent = true,
+    })
+  end
+
+  for _, child in ipairs(entry) do
+    if type(child) == "table" then
+      apply(child, { mode = mode, buffer = buffer, nowait = nowait })
+    end
+  end
+end
+
+function M.add(spec)
+  apply(spec, {})
+end
+
 function M.setup()
-  local wk = require("which-key")
-  wk.setup({
-    win = {
-      border = "rounded",
-      row = math.huge,
-      col = math.huge,
-      width = 0.3,
-      height = 0.9,
-      no_overlap = true,
-    },
-    max_description_length = 30,
-    show = {
-      delay = 600,
-    },
-  })
-  wk.add({
-    {
-      cond = function()
-        return not vim.g.vscode
-      end,
-      {
-        "<C-/>",
-        function()
-          wk.show({ global = false })
-        end,
-        mode = { "n", "x", "i", "c", "o", "t" },
-        desc = "Buffer Local Keymaps",
-      },
-      require("config.keybind.general"),
-      require("config.keybind.langs"),
-      require("config.keybind.mapgroup"),
-      require("config.keybind.enhancement"),
-      require("config.keybind.extra"),
-    },
-    {
-      cond = function()
-        return vim.g.vscode
-      end,
-      require("config.keybind.vscode"),
-    },
+  if vim.g.vscode then
+    M.add(require("config.keybind.vscode"))
+    return
+  end
+
+  M.add({
+    require("config.keybind.general"),
+    require("config.keybind.langs"),
+    require("config.keybind.enhancement"),
+    require("config.keybind.extra"),
   })
 end
 

@@ -1,50 +1,67 @@
-local handler = function(virtText, lnum, endLnum, width, truncate)
-  local newVirtText = {}
-  local suffix = (" 󰁂 %d "):format(endLnum - lnum)
-  local sufWidth = vim.fn.strdisplaywidth(suffix)
-  local targetWidth = width - sufWidth
-  local curWidth = 0
-  for _, chunk in ipairs(virtText) do
-    local chunkText = chunk[1]
-    local chunkWidth = vim.fn.strdisplaywidth(chunkText)
-    if targetWidth > curWidth + chunkWidth then
-      table.insert(newVirtText, chunk)
-    else
-      chunkText = truncate(chunkText, targetWidth - curWidth)
-      local hlGroup = chunk[2]
-      table.insert(newVirtText, { chunkText, hlGroup })
-      chunkWidth = vim.fn.strdisplaywidth(chunkText)
-      if curWidth + chunkWidth < targetWidth then
-        suffix = suffix .. (" "):rep(targetWidth - curWidth - chunkWidth)
-      end
-      break
-    end
-    curWidth = curWidth + chunkWidth
-  end
-  table.insert(newVirtText, { suffix, "MoreMsg" })
-  return newVirtText
-end
-
 local M = {}
 
+function M.foldtext()
+  local start, end_lnum = vim.v.foldstart, vim.v.foldend
+  local text = vim.fn.getline(start):gsub("\t", string.rep(" ", vim.bo.tabstop))
+  local leader = (vim.bo.commentstring or ""):gsub("%%s.*", ""):gsub("%s+$", "")
+  if leader ~= "" then
+    text = text:gsub("^%s*" .. vim.pesc(leader) .. "%s*", "")
+  else
+    text = text:gsub("^%s+", "")
+  end
+  text = text:gsub("%s+$", "")
+  if text == "" then
+    text = "{empty}"
+  end
+  return string.format(" [%d lines] %s", end_lnum - start + 1, text)
+end
+
 function M.setup()
-  require("ufo").setup({
-    close_fold_kinds_for_ft = {
-      default = { "imports", "comment" },
-    },
-    fold_virt_text_handler = handler,
-    provider_selector = function(_, ft, buftype)
-      if ft == "bigfile" then
-        return ""
+  _G.UserUtils.autocmd("BufWinEnter", {
+    callback = function(args)
+      local bufnr = args.buf
+      if vim.bo[bufnr].buftype ~= "" or vim.b[bufnr].bigfile then
+        return
       end
-      if
-        buftype ~= ""
-        or not vim.tbl_contains(require("config.langs.treesitter").fts, ft)
-        or ft == "gitignore"
-      then
-        return { "lsp", "indent" }
+
+      local win = vim.api.nvim_get_current_win()
+      if not vim.tbl_contains(require("config.langs.treesitter").fts, vim.bo[bufnr].filetype) then
+        vim.wo[win].foldmethod = "indent"
+        return
       end
-      return { "lsp", "treesitter" }
+
+      vim.wo[win].foldmethod = "expr"
+      vim.wo[win].foldexpr = "v:lua.require'vim.treesitter'.foldexpr()"
+
+      local ok, parser = pcall(vim.treesitter.get_parser, bufnr)
+      if not ok or not parser then
+        return
+      end
+      local parsed = { pcall(function()
+        return parser:parse()
+      end) }
+      local tree = parsed[1] and parsed[2] and parsed[2][1]
+      if not tree then
+        return
+      end
+
+      local stack = { tree:root() }
+      while #stack > 0 do
+        local node = table.remove(stack)
+        for child in node:iter_children() do
+          local node_type = child:type()
+          local start_row = child:start()
+          local end_row = (child:end_())
+          if end_row > start_row and (node_type:find("^import") or node_type:find("comment")) then
+            vim.api.nvim_win_call(win, function()
+              vim.api.nvim_win_set_cursor(win, { start_row + 1, 0 })
+              vim.cmd("silent! normal! zc")
+            end)
+          else
+            table.insert(stack, child)
+          end
+        end
+      end
     end,
   })
 end

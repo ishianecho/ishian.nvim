@@ -19,7 +19,7 @@ local function add_buffer_keybinds(bufnr)
   vim.b[bufnr].database_keybind_kind = kind
 
   if is_dadbod then
-    require("which-key").add({
+    require("config.keybind").add({
       {
         buffer = bufnr,
         {
@@ -38,7 +38,7 @@ local function add_buffer_keybinds(bufnr)
     return
   end
 
-  require("which-key").add({
+  require("config.keybind").add({
     {
       buffer = bufnr,
       {
@@ -72,7 +72,7 @@ function M.setup()
   end
   setup_done = true
 
-  require("which-key").add({
+  require("config.keybind").add({
     {
       cond = function()
         return _G.UserUtils.plugin_installed("vim-dadbod-ui")

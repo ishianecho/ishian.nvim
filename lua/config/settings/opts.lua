@@ -31,8 +31,7 @@ function M.setup()
   vim.opt.foldlevelstart = 99
   vim.opt.foldenable = true
   vim.opt.fillchars = "eob: ,fold: ,foldopen:-,foldsep: ,foldinner: ,foldclose:+"
-  vim.opt.foldtext =
-    "v:lua.vim.fn.printf(' %s  [%d lines]', substitute(getline(v:foldstart), '\\t', repeat(' ', &tabstop), 'g'), v:foldend - v:foldstart + 1)"
+  vim.opt.foldtext = "v:lua.require'config.langs.fold'.foldtext()"
 
   vim.opt.laststatus = 3
   vim.opt.showtabline = 2

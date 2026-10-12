@@ -32,10 +32,6 @@ local function command_palette_map(lhs, desc, mode)
 end
 
 local mappings = {
-  native("<C-_>", function()
-    require("which-key").show({ global = false })
-  end, "Buffer Local Keymaps", { "n", "x", "i", "c", "o", "t" }),
-
   -- General: buffers
   map("<leader>ee", "workbench.action.files.openFile", "New buffer (input filename)"),
   map("<leader>en", "workbench.action.files.newUntitledFile", "New file"),

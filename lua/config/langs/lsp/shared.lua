@@ -33,9 +33,5 @@ local ok, blink = pcall(require, "blink.cmp")
 if ok then
   M.capabilities = vim.tbl_deep_extend("force", M.capabilities, blink.get_lsp_capabilities())
 end
-M.capabilities.textDocument.foldingRange = {
-  dynamicRegistration = false,
-  lineFoldingOnly = true,
-}
 
 return M
