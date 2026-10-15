@@ -3,5 +3,4 @@ return {
   require("config.keybind.langs.complete"),
   require("config.keybind.langs.diagnostic"),
   require("config.keybind.langs.lsp"),
-  require("config.keybind.langs.test"),
 }

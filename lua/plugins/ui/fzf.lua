@@ -1,11 +1,8 @@
 return {
   {
-    "ibhagwan/fzf-lua",
-    lazy = true,
+    src = "https://github.com/ibhagwan/fzf-lua",
     cmd = "FzfLua",
-    dependencies = {
-      "nvim-tree/nvim-web-devicons",
-    },
+    dependencies = { "nvim-web-devicons" },
     config = function()
       require("config.ui.fzf").setup()
     end,

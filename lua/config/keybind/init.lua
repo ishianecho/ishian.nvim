@@ -40,7 +40,6 @@ function M.setup()
     require("config.keybind.general"),
     require("config.keybind.langs"),
     require("config.keybind.editing"),
-    require("config.keybind.extra"),
   })
 end
 

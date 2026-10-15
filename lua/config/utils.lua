@@ -4,8 +4,7 @@ function M.setup()
   _G.UserUtils = _G.UserUtils or {}
 
   function _G.UserUtils.plugin_installed(name)
-    local data_path = vim.fn.stdpath("data")
-    local plugin_path = data_path .. "/lazy/" .. name
+    local plugin_path = vim.fn.stdpath("data") .. "/site/pack/core/opt/" .. name
     return vim.fn.isdirectory(plugin_path) == 1
   end
 

@@ -62,30 +62,17 @@ function M.setup()
     sources = {
       default = function()
         local sources = {
-          "lazydev",
           "lsp",
           "path",
           "snippets",
           "buffer",
         }
-        if pcall(require, "vim_dadbod_completion.blink") then
-          table.insert(sources, "dadbod")
-        end
         if pcall(require, "nvim-mybatis.completion.blink") then
           table.insert(sources, "mybatis")
         end
         return sources
       end,
       providers = {
-        lazydev = {
-          name = "LazyDev",
-          module = "lazydev.integrations.blink",
-          score_offset = 100,
-        },
-        dadbod = {
-          name = "Dadbod",
-          module = "vim_dadbod_completion.blink",
-        },
         mybatis = {
           name = "Mybatis",
           module = "nvim-mybatis.completion.blink",

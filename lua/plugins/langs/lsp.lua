@@ -1,24 +1,15 @@
 return {
   {
-    "neovim/nvim-lspconfig",
-    dependencies = {
-      "mason-org/mason.nvim",
-      { "nanotee/sqls.nvim", lazy = false },
-    },
-    lazy = false,
-    opts = {
-      servers = {
-        copilot = { enabled = false },
-      },
-    },
+    src = "https://github.com/neovim/nvim-lspconfig",
+    dependencies = { "mason.nvim", "sqls.nvim" },
     config = function()
       require("config.langs.lsp.init").setup()
     end,
   },
+  { src = "https://github.com/mason-org/mason.nvim" },
+  { src = "https://github.com/nanotee/sqls.nvim" },
   {
-    "fatih/vim-go",
-    optional = true,
-    lazy = true,
+    src = "https://github.com/fatih/vim-go",
     ft = "go",
     init = function()
       vim.g.go_fmt_autosave = 1
@@ -27,43 +18,32 @@ return {
     end,
   },
   {
-    "b0o/schemastore.nvim",
-    lazy = true,
+    src = "https://github.com/b0o/schemastore.nvim",
     ft = { "json", "yaml" },
   },
   {
-    "folke/lazydev.nvim",
-    lazy = true,
-    ft = "lua",
-    config = function()
-      require("config.langs.lsp.extra.lazydev").setup()
-    end,
+    src = "https://github.com/mfussenegger/nvim-jdtls",
+    ft = "java",
   },
   {
-    "mfussenegger/nvim-jdtls",
-    lazy = true,
-    ft = { "java" },
-  },
-  {
-    "qvalentin/helm-ls.nvim",
-    lazy = true,
+    src = "https://github.com/qvalentin/helm-ls.nvim",
     ft = "helm",
     config = function()
-      require("config.langs.lsp.extra.helm").setup()
+      require("config.langs.lsp.helm").setup()
     end,
   },
   {
-    "ishianecho/nvim-mybatis",
+    src = "https://github.com/ishianecho/nvim-mybatis",
     enabled = false,
     config = function()
       require("nvim-mybatis").setup({})
     end,
   },
   {
-    "ishianecho/maa-pipeline.nvim",
+    src = "https://github.com/ishianecho/maa-pipeline.nvim",
     build = "npm install --include=dev && npm run build",
     config = function()
-      require("config.langs.lsp.extra.maa").setup()
+      require("config.langs.lsp.maa").setup()
     end,
   },
 }

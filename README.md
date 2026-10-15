@@ -1,6 +1,6 @@
 # Neovim Config
 
-Personal Neovim configuration: lazy.nvim-managed, Lua-only. See [KEYMAP.md](KEYMAP.md) for the keymap reference.
+Personal Neovim configuration: managed with the built-in `vim.pack`, Lua-only. See [KEYMAP.md](KEYMAP.md) for the keymap reference.
 
 ## Editor Core
 
@@ -36,13 +36,13 @@ Personal Neovim configuration: lazy.nvim-managed, Lua-only. See [KEYMAP.md](KEYM
 | Lint | nvim-lint |
 | Format | conform.nvim |
 | Treesitter | nvim-treesitter |
-| Tests | neotest (neotest-golang, neotest-java) |
 | Java | nvim-jdtls |
 | Go | vim-go |
 | Helm | helm-ls.nvim |
-| Lua dev | lazydev.nvim |
 | SQL | sqls.nvim |
 | Schemas | schemastore.nvim |
+| MAA pipeline | maa-pipeline.nvim |
+| Mybatis | nvim-mybatis |
 
 ### LSP servers
 
@@ -101,8 +101,7 @@ Personal Neovim configuration: lazy.nvim-managed, Lua-only. See [KEYMAP.md](KEYM
 | --- | --- |
 | Status / commit | neogit |
 | Diff / file history | diffview.nvim |
-| Hunks (signs, stage, blame) | gitsigns.nvim |
-| Hunk ops (apply / reset) | mini.diff |
+| Hunks (signs, stage/reset hunk or line, blame) | gitsigns.nvim |
 | GitHub (issues, PRs, discussions) | octo.nvim |
 
 ## Editing
@@ -112,16 +111,5 @@ Personal Neovim configuration: lazy.nvim-managed, Lua-only. See [KEYMAP.md](KEYM
 | Move lines / selections | mini.move |
 | Autopairs | nvim-autopairs |
 | Search & replace | grug-far.nvim |
-| Todo comments | todo-comments.nvim |
 | Surround | mini.surround |
-
-## Extras
-
-| Feature | Plugin |
-| --- | --- |
-| Database UI / queries | vim-dadbod + dadbod-ui + dadbod-completion |
 | Markdown rendering | render-markdown.nvim |
-| Markdown lists | autolist.nvim + bullets.vim |
-| AI (codex) | mini.codex + codex-prompt-lsp |
-| MAA pipeline | maa-pipeline.nvim |
-| Mybatis | nvim-mybatis |

@@ -1,6 +1,6 @@
 # Editing Keybinds
 
-Pickers, explorer, search & replace, and misc editing tools.
+Pickers, explorer, search & replace, git, and misc editing tools.
 
 ## `codemap`
 
@@ -42,20 +42,51 @@ Not set in config.
 | `<leader>n` | n | Notification History |
 | `<leader>fn` | n | Notification History |
 
+## `git`
+
+Active when the plugins are installed.
+
+| Key | Mode | Description |
+| --- | --- | --- |
+| `<leader>gg` | n | Show: neogit ui |
+| `<leader>gD` | n | Diff file against branch |
+| `<leader>ghi` | n | List issues |
+| `<leader>ghp` | n | List pull requests |
+| `<leader>ghd` | n | List discussions |
+| `<leader>ghn` | n | List notifications |
+| `<leader>ghs` | n | Search GitHub |
+| `<leader>ght` | n | Toggle use_local_fs |
+| `[h` | n | Prev hunk |
+| `]h` | n | Next hunk |
+| `<leader>hs` | n x | Stage hunk |
+| `<leader>hr` | n x | Reset hunk |
+| `<leader>hl` | n | Stage line hunk |
+| `<leader>hL` | n | Reset line hunk |
+| `<leader>hS` | n | Stage buffer |
+| `<leader>hR` | n | Reset buffer |
+| `<leader>hu` | n | Undo stage hunk |
+| `<leader>hp` | n | Preview hunk |
+| `<leader>hb` | n | Blame line |
+| `<leader>hB` | n | Blame buffer |
+| `<leader>hd` | n | Diff this |
+| `<leader>hD` | n | Diff line ~ |
+| `ih` | o x | GitSigns Select Hunk |
+
+## `database`
+
+Registered by `setup()`, not a plain spec. The SQL keys are buffer-local (sqls).
+
+| Key | Mode | Description |
+| --- | --- | --- |
+| `<leader>dc` | n | Switch connection (SQL buffer) |
+| `<leader>db` | n | Switch database (SQL buffer) |
+| `<leader>dx` | n x | Execute query / selection (SQL buffer) |
+
 ## `replace`
 
 | Key | Mode | Description |
 | --- | --- | --- |
 | `<leader>ss` | n x | Search and Replace |
-
-## `todo-comments`
-
-| Key | Mode | Description |
-| --- | --- | --- |
-| `]t` | n | Next Todo Comment |
-| `[t` | n | Previous Todo Comment |
-| `<leader>ft` | n | Todo |
-| `<leader>fT` | n | Todo/Fix/Fixme |
 
 ## `words`
 

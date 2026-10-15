@@ -1,11 +1,8 @@
 return {
   {
-    "folke/noice.nvim",
-    lazy = true,
+    src = "https://github.com/folke/noice.nvim",
     event = "VeryLazy",
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-    },
+    dependencies = { "nui.nvim" },
     config = function()
       require("config.ui.noice").setup()
     end,

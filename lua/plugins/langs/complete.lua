@@ -1,20 +1,7 @@
 return {
   {
-    "saghen/blink.cmp",
-    version = "1.*",
-    lazy = false,
-    dependencies = {
-      {
-        "rafamadriz/friendly-snippets",
-        enabled = false,
-      },
-      {
-        "kristijanhusak/vim-dadbod-completion",
-        dependencies = {
-          "tpope/vim-dadbod",
-        },
-      },
-    },
+    src = "https://github.com/saghen/blink.cmp",
+    version = vim.version.range("1"),
     config = function()
       require("config.langs.complete").setup()
     end,

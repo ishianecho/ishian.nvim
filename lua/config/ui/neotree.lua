@@ -37,7 +37,7 @@ function M.setup()
         },
         ["O"] = {
           function(state)
-            require("lazy.util").open(state.tree:get_node().path, { system = true })
+            vim.ui.open(state.tree:get_node().path)
           end,
           desc = "Open with System Application",
         },

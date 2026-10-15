@@ -3,7 +3,6 @@ local M = {}
 function M.setup()
   vim.opt.title = true
   vim.opt.titlestring = "NVIM: %f"
-  vim.opt.rtp:prepend(vim.fn.stdpath("data") .. "/lazy/lazy.nvim")
   vim.opt.encoding = "utf-8"
   vim.opt.syntax = "on"
   vim.opt.compatible = false

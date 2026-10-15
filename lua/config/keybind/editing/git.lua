@@ -50,7 +50,7 @@ return {
       {
         "<leader>ght",
         function()
-          require("config.extra.git.octo").toggle_use_local_fs()
+          require("config.editing.octo").toggle_use_local_fs()
         end,
         desc = "Toggle use_local_fs",
       },
@@ -60,6 +60,20 @@ return {
       { "]h", "<cmd>Gitsigns next_hunk<CR>", desc = "Next hunk" },
       { "<leader>hs", "<cmd>Gitsigns stage_hunk<CR>", mode = { "n", "x" }, desc = "Stage hunk" },
       { "<leader>hr", "<cmd>Gitsigns reset_hunk<CR>", mode = { "n", "x" }, desc = "Reset hunk" },
+      {
+        "<leader>hl",
+        function()
+          require("gitsigns").stage_hunk({ vim.fn.line("."), vim.fn.line(".") })
+        end,
+        desc = "Stage line hunk",
+      },
+      {
+        "<leader>hL",
+        function()
+          require("gitsigns").reset_hunk({ vim.fn.line("."), vim.fn.line(".") })
+        end,
+        desc = "Reset line hunk",
+      },
       { "<leader>hS", "<cmd>Gitsigns stage_buffer<CR>", desc = "Stage buffer" },
       { "<leader>hR", "<cmd>Gitsigns reset_buffer<CR>", desc = "Reset buffer" },
       { "<leader>hu", "<cmd>Gitsigns undo_stage_hunk<CR>", desc = "Undo stage hunk" },

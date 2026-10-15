@@ -1,6 +1,6 @@
 # Language Keybinds
 
-LSP, diagnostics, code actions, and tests.
+LSP, diagnostics, and code actions.
 
 ## `code-action`
 
@@ -21,22 +21,6 @@ LSP, diagnostics, code actions, and tests.
 | `]w` | n | Goto: next warning |
 | `gQ` | n | Show: qflist |
 | `gL` | n | Show: loclist |
-
-## `test`
-
-| Key | Mode | Description |
-| --- | --- | --- |
-| `<leader>t` | n | +test |
-| `<leader>ta` | n | Attach to Test (Neotest) |
-| `<leader>tt` | n | Run File (Neotest) |
-| `<leader>tT` | n | Run All Test Files (Neotest) |
-| `<leader>tr` | n | Run Nearest (Neotest) |
-| `<leader>tl` | n | Run Last (Neotest) |
-| `<leader>ts` | n | Toggle Summary (Neotest) |
-| `<leader>to` | n | Show Output (Neotest) |
-| `<leader>tO` | n | Toggle Output Panel (Neotest) |
-| `<leader>tS` | n | Stop (Neotest) |
-| `<leader>tw` | n | Toggle Watch (Neotest) |
 
 ## `lsp` (reference only)
 

@@ -11,32 +11,10 @@ local function add_buffer_keybinds(bufnr)
     return
   end
 
-  local is_dadbod = vim.b[bufnr].dbui_db_key_name ~= nil
-  local kind = is_dadbod and "dadbod" or "sqls"
-  if vim.b[bufnr].database_keybind_kind == kind then
+  if vim.b[bufnr].database_keybind_kind == "sqls" then
     return
   end
-  vim.b[bufnr].database_keybind_kind = kind
-
-  if is_dadbod then
-    require("config.keybind").add({
-      {
-        buffer = bufnr,
-        {
-          "<leader>dx",
-          "<Cmd>%DB<CR>",
-          desc = "Execute query with Dadbod",
-        },
-        {
-          "<leader>dx",
-          "<Cmd>'<,'>DB<CR>",
-          mode = "x",
-          desc = "Execute selection with Dadbod",
-        },
-      },
-    })
-    return
-  end
+  vim.b[bufnr].database_keybind_kind = "sqls"
 
   require("config.keybind").add({
     {
@@ -71,19 +49,6 @@ function M.setup()
     return
   end
   setup_done = true
-
-  require("config.keybind").add({
-    {
-      cond = function()
-        return _G.UserUtils.plugin_installed("vim-dadbod-ui")
-      end,
-      {
-        "<leader>dd",
-        "<Cmd>DBUIToggle<CR>",
-        desc = "Database UI",
-      },
-    },
-  })
 
   _G.UserUtils.autocmd({ "BufEnter", "FileType" }, {
     callback = function(args)

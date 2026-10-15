@@ -1,7 +1,6 @@
 return {
   {
-    "sainnhe/everforest",
-    lazy = false,
+    src = "https://github.com/sainnhe/everforest",
     priority = 1000,
     config = function()
       require("config.ui.colortheme").setup()
