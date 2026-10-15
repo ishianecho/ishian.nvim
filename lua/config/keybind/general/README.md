@@ -14,16 +14,8 @@ Buffers, tabs, windows, terminal, and UI toggles.
 | `<leader>bd` | n | Delete curr buffer |
 | `<leader>bC` | n | Copy curr buffer absolute path |
 | `<leader>bc` | n | Copy curr buffer relative path |
-| `[B` | n | Move buffer left |
-| `]B` | n | Move buffer right |
 | `H` | n | Goto: prev buffer |
 | `L` | n | Goto: next buffer |
-| `<leader>bH` | n | Delete left buffers |
-| `<leader>bL` | n | Delete right buffers |
-| `<leader>bo` | n | Delete other buffers |
-| `<leader>bp` | n | Toggle: buffer pin |
-| `<leader>bP` | n | Delete unpinned buffers |
-| `<leader>bs` | n | Select buffer |
 
 ## `misc`
 
@@ -42,7 +34,6 @@ Buffers, tabs, windows, terminal, and UI toggles.
 | `[<tab>` | n | Previous tab |
 | `]<tab>` | n | Next tab |
 | `<leader><tab>d` | n | Delete tab |
-| `<leader><tab>r` | n | Rename |
 
 ## `terminal`
 
@@ -58,7 +49,6 @@ Buffers, tabs, windows, terminal, and UI toggles.
 | `<leader>ud` | n | Toggle diagnostic (virtual lines) |
 | `<leader>uc` | n | Switch colorscheme (light / dark) |
 | `<leader>uC` | n | Colorschemes |
-| `<leader>u<tab>` | n | Toggle tabline mode (buffers / tabs) |
 
 ## `window`
 

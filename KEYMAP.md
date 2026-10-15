@@ -13,11 +13,11 @@ Per-directory references with full key tables:
 | File | Keys | Scope |
 | --- | --- | --- |
 | `general/misc.lua` | `jj`, `<leader>w`, `<leader>z` | esc / save / quit |
-| `general/buffer.lua` | `<leader>e*`, `[b` `]b` `[B` `]B`, `H` `L`, `<leader>b*` | buffers (bufferline-aware) |
+| `general/buffer.lua` | `<leader>e*`, `[b` `]b`, `H` `L`, `<leader>b*` | buffers |
 | `general/tab.lua` | `[<tab>` `]<tab>`, `<leader><tab>d` | tabs |
 | `general/window.lua` | `<C-hjkl>`, `<A-hjkl>`, `<leader>HJKL`, `<leader>V` `v` `-` `\|` `q` | window focus / resize / swap / split |
 | `general/terminal.lua` | `<C-q>` (t) | terminal mode |
-| `general/ui.lua` | `<leader>u*` | redraw, diagnostics virtual lines, colorscheme, tabline mode |
+| `general/ui.lua` | `<leader>u*` | redraw, diagnostics virtual lines, colorscheme |
 | `langs/lsp.lua` | `gd` `gi` `gr` `gy` `gD` `gai` `gao` | goto / calls (reference only) |
 | `langs/code-action.lua` | `<leader>c*` | code actions, rename |
 | `langs/complete.lua` | `<Tab>` `<C-k>` `<C-j>` `<C-y>` | completion (reference only) |
@@ -31,8 +31,6 @@ Per-directory references with full key tables:
 | `editing/replace.lua` | `<leader>ss` | grug-far |
 | `editing/words.lua` | `]]` `[[` | next/prev word reference |
 | `editing/codemap.lua` | `<leader>cm*` | codewindow minimap (if installed) |
-| `editing/notify.lua` | `<leader>n`, `<leader>fn` | noice history |
-| `editing/workspace.lua` | `<leader>fs`, `<leader>S*` | sessions |
 | `editing/git.lua` | `<leader>gg`, `<leader>g*`, `<leader>gh*`, `[h` `]h`, `<leader>h*` | neogit, octo, gitsigns hunks |
 | `editing/database.lua` | buffer-local `<leader>d*` (SQL buffers) | sqls execute / switch |
 
@@ -40,7 +38,6 @@ Per-directory references with full key tables:
 
 | Keys | Where | Purpose |
 | --- | --- | --- |
-| `<C-S-hjkl>` | `config/editing/move.lua` | mini.move lines/selections |
 | `K` `gK` `<F2>` `<leader>rn` `<leader>cr` `<leader>C` `<leader>cc` | `config/langs/lsp/shared.lua` | LSP hover / signature / rename / code action (on_attach) |
 | `<Tab>`/`<C-y>`/`<C-k>`/`<C-j>`/… | `config/langs/complete.lua` | blink.cmp select/accept/snippets |
 | `zR` `zM` | native | open/close all folds |

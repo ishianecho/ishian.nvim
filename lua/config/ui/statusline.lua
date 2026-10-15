@@ -140,7 +140,7 @@ function M.render()
   local line_count = math.max(api.nvim_buf_line_count(0), 1)
   local progress = math.floor(cursor[1] * 100 / line_count)
 
-  local filetype_icon, fileformat_icon = "", ""
+  local filetype_icon = ""
   local ok, devicons = pcall(require, "nvim-web-devicons")
   if ok then
     local function icon_segment(icon, icon_hl)
@@ -155,16 +155,13 @@ function M.render()
       icon, icon_hl = devicons.get_icon_by_filetype(filetype, { default = true })
       filetype_icon = icon_segment(icon, icon_hl)
     end
-    local fileformat = vim.bo[bufnr].fileformat
-    local fileformat_name = fileformat == "unix" and "linux" or fileformat
-    icon, icon_hl = devicons.get_icon(fileformat_name, fileformat_name, { default = true })
-    fileformat_icon = icon_segment(icon, icon_hl)
   end
 
   local file_info = (filetype_icon ~= "" and filetype_icon .. " " or "")
     .. (filetype ~= "" and escape(filetype) .. " | " or "")
     .. escape(encoding)
-    .. (fileformat_icon ~= "" and " " .. fileformat_icon or "")
+
+  local path = vim.fn.pathshorten(vim.fn.fnamemodify(api.nvim_buf_get_name(bufnr), ":."))
 
   return "%#"
     .. (mode_groups[mode_code] or "MiniStatuslineModeOther")
@@ -173,7 +170,8 @@ function M.render()
     .. " %*"
     .. (git ~= "" and " | " .. git or "")
     .. " | "
-    .. "%f %m%r%="
+    .. escape(path)
+    .. " %m%r%="
     .. join(right, " | ")
     .. (diagnostic_status ~= "" and (#right > 0 and " | " or "") .. diagnostic_status or "")
     .. " | "

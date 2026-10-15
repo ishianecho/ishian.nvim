@@ -7,13 +7,10 @@ local sources = {
   "plugins.langs.lsp",
   "plugins.langs.treesitter",
   "plugins.editing.grug-far",
-  "plugins.editing.move",
   "plugins.editing.pairs",
-  "plugins.ui.bufferline",
   "plugins.ui.colortheme",
   "plugins.ui.fzf",
   "plugins.ui.neotree",
-  "plugins.ui.noice",
   "plugins.editing.git",
   "plugins.editing.markdown",
 }
@@ -30,7 +27,7 @@ local loaded = {}
 local added = {}
 
 local function lazy(spec)
-  return spec.cmd ~= nil or spec.ft ~= nil or spec.event ~= nil
+  return spec.cmd ~= nil or spec.ft ~= nil
 end
 
 local function register(spec)
@@ -105,28 +102,6 @@ local function attach_filetype(spec)
   })
 end
 
-local function attach_event(spec)
-  local events = type(spec.event) == "table" and spec.event or { spec.event }
-  for _, event in ipairs(events) do
-    local name, pattern = event:match("^(%S+)%s*(.*)$")
-    if name == "VeryLazy" then
-      name, pattern = "UIEnter", nil
-    end
-    _G.UserUtils.autocmd(name, {
-      pattern = pattern ~= "" and pattern or nil,
-      callback = function(args)
-        if loaded[spec.name] then
-          return
-        end
-        M.load(spec.name)
-        if args.buf then
-          vim.api.nvim_exec_autocmds(name, { buffer = args.buf })
-        end
-      end,
-    })
-  end
-end
-
 local function attach_require()
   local providers = {}
   for _, spec in ipairs(order) do
@@ -189,9 +164,6 @@ function M.setup()
       end
       if spec.ft then
         attach_filetype(spec)
-      end
-      if spec.event then
-        attach_event(spec)
       end
     end
   end

@@ -35,13 +35,6 @@ Not set in config.
 | `>` | n | Next source |
 | `?` | n | Help |
 
-## `notify`
-
-| Key | Mode | Description |
-| --- | --- | --- |
-| `<leader>n` | n | Notification History |
-| `<leader>fn` | n | Notification History |
-
 ## `git`
 
 Active when the plugins are installed.
@@ -94,16 +87,6 @@ Registered by `setup()`, not a plain spec. The SQL keys are buffer-local (sqls).
 | --- | --- | --- |
 | `]]` | n t | Next Reference |
 | `[[` | n t | Prev Reference |
-
-## `workspace`
-
-| Key | Mode | Description |
-| --- | --- | --- |
-| `<leader>fs` | n | Session |
-| `<leader>Sd` | n | Delete |
-| `<leader>SD` | n | DeletePicker |
-| `<leader>Sr` | n | Restore |
-| `<leader>Ss` | n | Save |
 
 ## `picker/find`
 

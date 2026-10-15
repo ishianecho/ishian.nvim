@@ -33,6 +33,7 @@ function M.setup()
   vim.opt.foldtext = "v:lua.require'config.langs.fold'.foldtext()"
 
   vim.opt.laststatus = 3
+  vim.opt.cmdheight = 0
   vim.opt.showtabline = 2
 
   vim.opt.clipboard = "unnamedplus"
@@ -40,7 +41,6 @@ function M.setup()
   vim.opt.incsearch = true
   vim.opt.updatetime = 600
   vim.opt.timeoutlen = 400
-  vim.opt.sessionoptions = "globals,blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
   vim.opt.mouse = "a"
   vim.opt.mousefocus = true

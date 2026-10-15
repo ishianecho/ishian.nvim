@@ -55,25 +55,8 @@ M.fts = {
   "yaml", -- GitHub Actions workflows use the YAML parser.
 }
 
-local function start_treesitter(bufnr, language)
-  if not vim.api.nvim_buf_is_valid(bufnr) or vim.bo[bufnr].filetype == "" then
-    return
-  end
-
-  local loaded, err = vim.treesitter.language.add(language)
-  if not loaded then
-    vim.notify(("[Treesitter] Could not load %s: %s"):format(language, err or "unknown error"), vim.log.levels.WARN)
-    return
-  end
-
-  local ok, start_err = pcall(vim.treesitter.start, bufnr, language)
-  if not ok then
-    vim.notify(("[Treesitter] Could not start %s: %s"):format(language, start_err), vim.log.levels.WARN)
-  end
-end
-
 function M.setup()
-  local powershell = require("config.langs.lsp.servers.powershell")
+  local powershell = require("config.langs.lsp.powershell")
   local autocmd = _G.UserUtils.autocmd
   local treesitter = require("nvim-treesitter")
   local pending = {}
@@ -118,7 +101,24 @@ function M.setup()
 
           for _, item in ipairs(buffers or {}) do
             if vim.api.nvim_buf_is_valid(item.bufnr) and vim.bo[item.bufnr].filetype == item.filetype then
-              start_treesitter(item.bufnr, language)
+              local bufnr = item.bufnr
+              if not vim.api.nvim_buf_is_valid(bufnr) or vim.bo[bufnr].filetype == "" then
+                return
+              end
+
+              local loaded, err = vim.treesitter.language.add(language)
+              if not loaded then
+                vim.notify(
+                  ("[Treesitter] Could not load %s: %s"):format(language, err or "unknown error"),
+                  vim.log.levels.WARN
+                )
+                return
+              end
+
+              local ok, start_err = pcall(vim.treesitter.start, bufnr, language)
+              if not ok then
+                vim.notify(("[Treesitter] Could not start %s: %s"):format(language, start_err), vim.log.levels.WARN)
+              end
             end
           end
         end)

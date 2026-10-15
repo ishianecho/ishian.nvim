@@ -10,7 +10,6 @@ Personal Neovim configuration: managed with the built-in `vim.pack`, Lua-only. S
 | Keymaps | native (`vim.keymap.set`) |
 | Folding | treesitter folds + indent fallback |
 | Big files | degraded mode (no folds / conceal / diagnostics) |
-| Session | per-tab buffer persistence |
 | Images | `vim.ui.img` |
 | Terminal integration | kitty / Windows Terminal |
 
@@ -19,12 +18,11 @@ Personal Neovim configuration: managed with the built-in `vim.pack`, Lua-only. S
 | Feature | Plugin |
 | --- | --- |
 | Theme | everforest |
-| Bufferline | bufferline.nvim |
 | Statusline | custom |
 | File explorer | neo-tree.nvim |
 | Picker | fzf-lua |
-| Messages / cmdline | noice.nvim |
-| Notifications | noice.nvim |
+| Messages / cmdline | native (`cmdheight=0`) |
+| Notifications | custom (floating, above statusline) |
 | Minimap | codewindow.nvim |
 
 ## Language Tooling
@@ -108,7 +106,6 @@ Personal Neovim configuration: managed with the built-in `vim.pack`, Lua-only. S
 
 | Feature | Plugin |
 | --- | --- |
-| Move lines / selections | mini.move |
 | Autopairs | nvim-autopairs |
 | Search & replace | grug-far.nvim |
 | Surround | mini.surround |
