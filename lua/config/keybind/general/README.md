@@ -67,7 +67,7 @@ Buffers, tabs, windows, terminal, and UI toggles.
 | `<A-j>` | n | Window resize down |
 | `<A-k>` | n | Window resize up |
 | `<A-l>` | n | Window resize right |
-| `<leader>H` | n | Window swap left |
-| `<leader>J` | n | Window swap down |
-| `<leader>K` | n | Window swap up |
-| `<leader>L` | n | Window swap right |
+| `<C-S-h>` | n | Window swap left |
+| `<C-S-j>` | n | Window swap down |
+| `<C-S-k>` | n | Window swap up |
+| `<C-S-l>` | n | Window swap right |

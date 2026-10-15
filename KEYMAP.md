@@ -15,7 +15,7 @@ Per-directory references with full key tables:
 | `general/misc.lua` | `jj`, `<leader>w`, `<leader>z` | esc / save / quit |
 | `general/buffer.lua` | `<leader>e*`, `[b` `]b`, `H` `L`, `<leader>b*` | buffers |
 | `general/tab.lua` | `[<tab>` `]<tab>`, `<leader><tab>d` | tabs |
-| `general/window.lua` | `<C-hjkl>`, `<A-hjkl>`, `<leader>HJKL`, `<leader>V` `v` `-` `\|` `q` | window focus / resize / swap / split |
+| `general/window.lua` | `<C-hjkl>`, `<A-hjkl>`, `<C-S-hjkl>`, `<leader>V` `v` `-` `\|` `q` | window focus / resize / swap / split |
 | `general/terminal.lua` | `<C-q>` (t) | terminal mode |
 | `general/ui.lua` | `<leader>u*` | redraw, diagnostics virtual lines, colorscheme |
 | `langs/lsp.lua` | `gd` `gi` `gr` `gy` `gD` `gai` `gao` | goto / calls (reference only) |

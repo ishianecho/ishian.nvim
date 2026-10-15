@@ -81,6 +81,10 @@ local function swap_buf(dir)
   local curbuf = vim.api.nvim_get_current_buf()
   vim.cmd("wincmd " .. dir)
   if vim.api.nvim_get_current_win() == curwin then
+    if vim.env.KITTY_WINDOW_ID then
+      local kitty_dir_map = { h = "left", j = "bottom", k = "top", l = "right" }
+      vim.fn.system({ "kitty", "@", "action", "--self", "move_window", kitty_dir_map[dir] })
+    end
     return
   end
   local otherbuf = vim.api.nvim_get_current_buf()
@@ -196,7 +200,7 @@ return {
       desc = "Window resize right",
     },
     {
-      "<leader>H",
+      "<C-S-h>",
       function()
         swap_buf("h")
       end,
@@ -204,7 +208,7 @@ return {
       hidden = true,
     },
     {
-      "<leader>J",
+      "<C-S-j>",
       function()
         swap_buf("j")
       end,
@@ -212,7 +216,7 @@ return {
       hidden = true,
     },
     {
-      "<leader>K",
+      "<C-S-k>",
       function()
         swap_buf("k")
       end,
@@ -220,7 +224,7 @@ return {
       hidden = true,
     },
     {
-      "<leader>L",
+      "<C-S-l>",
       function()
         swap_buf("l")
       end,
