@@ -6,6 +6,7 @@ function M.setup()
   vim.opt.encoding = "utf-8"
   vim.opt.syntax = "on"
   vim.opt.compatible = false
+  vim.opt.exrc = true
 
   vim.opt.number = true
   vim.opt.relativenumber = true

@@ -40,6 +40,7 @@ Buffers, tabs, windows, terminal, and UI toggles.
 | Key | Mode | Description |
 | --- | --- | --- |
 | `<C-q>` | t | Quit terminal mode |
+| `<leader>rt` | n | Run a task from `.vscode/tasks.json` (also `:Task [label]`) |
 
 ## `ui`
 
