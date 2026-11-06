@@ -68,6 +68,7 @@ Buffers, tabs, windows, terminal, and UI toggles.
 | `<A-j>` | n | Window resize down |
 | `<A-k>` | n | Window resize up |
 | `<A-l>` | n | Window resize right |
+| `<C-S-z>` | n | Toggle window maximize (falls back to kitty `toggle_layout stack`) |
 | `<C-S-h>` | n | Window swap left |
 | `<C-S-j>` | n | Window swap down |
 | `<C-S-k>` | n | Window swap up |

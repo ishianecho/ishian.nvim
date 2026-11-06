@@ -92,6 +92,23 @@ local function swap_buf(dir)
   vim.api.nvim_win_set_buf(curwin, otherbuf)
 end
 
+local function zoom_or_terminal()
+  local wins = 0
+  for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+    if vim.api.nvim_win_get_config(win).relative == "" then
+      wins = wins + 1
+    end
+  end
+  if vim.t.zoomed then
+    vim.cmd("tabclose")
+  elseif wins > 1 then
+    vim.cmd("tab split")
+    vim.t.zoomed = true
+  elseif vim.env.KITTY_WINDOW_ID then
+    vim.fn.system({ "kitty", "@", "action", "--self", "toggle_layout", "stack" })
+  end
+end
+
 local function smart_close()
   local wins = vim.api.nvim_tabpage_list_wins(0)
   local buf = vim.api.nvim_get_current_buf()
@@ -198,6 +215,14 @@ return {
         resize_or_terminal("l")
       end,
       desc = "Window resize right",
+    },
+    {
+      "<C-S-z>",
+      function()
+        zoom_or_terminal()
+      end,
+      desc = "Toggle window maximize",
+      hidden = true,
     },
     {
       "<C-S-h>",
