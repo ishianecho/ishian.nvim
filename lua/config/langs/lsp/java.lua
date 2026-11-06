@@ -40,10 +40,25 @@ local function glob_jars(pattern)
   return vim.split(vim.fn.glob(pattern), "\n", { trimempty = true })
 end
 
+local function resolve_jdtls_java_home()
+  local best
+  local installs = vim.fn.glob(vim.fn.expand("~/.local/share/mise/installs/java/*"), false, true)
+  for _, dir in ipairs(installs) do
+    if vim.fn.isdirectory(dir) == 1 then
+      local version = vim.version.parse(vim.fs.basename(dir):gsub("^openjdk%-", ""))
+      if version and version.major >= 25 and (not best or vim.version.gt(version, best.version)) then
+        best = { version = version, path = dir }
+      end
+    end
+  end
+  return best and best.path or nil
+end
+
 function M.setup()
   local mason_share = vim.fn.stdpath("data") .. "/mason/share"
   local bundles = {}
   vim.list_extend(bundles, glob_jars(mason_share .. "/java-test/*.jar"))
+  local jdtls_java_home = resolve_jdtls_java_home()
 
   vim.lsp.config("jdtls", {
     on_attach = function(client, bufnr)
@@ -57,6 +72,7 @@ function M.setup()
       })
     end,
     capabilities = conf.capabilities,
+    cmd_env = jdtls_java_home and { JAVA_HOME = jdtls_java_home } or nil,
     settings = {
       java = {
         configuration = {

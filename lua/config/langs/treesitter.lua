@@ -27,6 +27,7 @@ M.fts = {
   "javascript",
   "jsdoc",
   "json5",
+  "kotlin",
   "latex",
   "lua",
   "luadoc",
@@ -55,18 +56,33 @@ M.fts = {
   "yaml", -- GitHub Actions workflows use the YAML parser.
 }
 
+-- Filetypes whose parsers are built from local grammar repos and installed
+-- into stdpath("data") .. "/site" manually, never fetched by nvim-treesitter.
+M.local_fts = {
+  "mybatis",
+}
+
+local local_filetypes = {
+  pattern = {
+    ["[%w.-]+[Mm]apper%.xml"] = "mybatis",
+    ["[%w.-]*[Ss]ql[Mm]ap%.xml"] = "mybatis",
+  },
+}
+
 function M.setup()
   local powershell = require("config.langs.lsp.powershell")
   local autocmd = _G.UserUtils.autocmd
   local treesitter = require("nvim-treesitter")
   local pending = {}
 
+  vim.filetype.add(local_filetypes)
+
   local filetypes = vim.tbl_filter(function(filetype)
     return filetype ~= "powershell" or powershell.is_available()
   end, M.fts)
 
   autocmd("FileType", {
-    pattern = filetypes,
+    pattern = vim.list_extend(filetypes, M.local_fts),
     callback = function(args)
       local bufnr = args.buf
       local filetype = vim.bo[bufnr].filetype
@@ -76,6 +92,20 @@ function M.setup()
       table.insert(pending[language], { bufnr = bufnr, filetype = filetype })
 
       if #pending[language] > 1 then
+        return
+      end
+
+      if vim.list_contains(M.local_fts, filetype) then
+        pending[language] = nil
+        local loaded, err = vim.treesitter.language.add(language)
+        if not loaded then
+          vim.notify(("[Treesitter] Could not load %s: %s"):format(language, err or "unknown error"), vim.log.levels.ERROR)
+          return
+        end
+        local ok, start_err = pcall(vim.treesitter.start, bufnr, language)
+        if not ok then
+          vim.notify(("[Treesitter] Could not start %s: %s"):format(language, start_err), vim.log.levels.WARN)
+        end
         return
       end
 

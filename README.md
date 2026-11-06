@@ -51,6 +51,7 @@ Personal Neovim configuration: managed with the built-in `vim.pack`, Lua-only. S
 | Go | gopls |
 | Java | jdtls |
 | JS / TS | vtsls, ts_ls |
+| Kotlin | kotlin_lsp |
 | Vue | vue_ls |
 | Python | ty |
 | Lua | lua_ls |
