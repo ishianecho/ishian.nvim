@@ -6,6 +6,7 @@ local sources = {
   "plugins.langs.linter",
   "plugins.langs.lsp",
   "plugins.langs.treesitter",
+  "plugins.editing.claude",
   "plugins.editing.grug-far",
   "plugins.editing.pairs",
   "plugins.ui.colortheme",
@@ -40,6 +41,34 @@ local function register(spec)
   specs[spec.name] = spec
 end
 
+local function queue(specs, opts)
+  local opt_dir = vim.fn.stdpath("data") .. "/site/pack/core/opt/"
+  for _, spec in ipairs(specs) do
+    local dir = opt_dir .. spec.name
+    local files = vim.fn.isdirectory(dir) == 1 and vim.fn.readdir(dir) or {}
+    if #files == 1 and files[1] == ".git" then
+      vim.fn.system({ "git", "-C", dir, "checkout", "-f", "HEAD" })
+      if vim.v.shell_error == 0 then
+        vim.notify("vim.pack: repaired " .. spec.name)
+      end
+    end
+  end
+  local fetching = vim.tbl_filter(function(spec)
+    return vim.fn.isdirectory(opt_dir .. spec.name) == 0
+  end, specs)
+  if #fetching > 0 then
+    local names = vim.tbl_map(function(spec)
+      return spec.name
+    end, fetching)
+    vim.notify("vim.pack: downloading " .. table.concat(names, ", "))
+    vim.cmd("redraw")
+    vim.pack.add(specs, opts)
+    vim.notify("vim.pack: download complete")
+  else
+    vim.pack.add(specs, opts)
+  end
+end
+
 function M.load(name)
   local spec = specs[name]
   if not spec and shared[name] then
@@ -63,7 +92,7 @@ function M.load(name)
   if added[name] then
     vim.cmd.packadd(name)
   else
-    vim.pack.add({ { src = spec.src, name = spec.name, version = spec.version } }, { confirm = false })
+    queue({ { src = spec.src, name = spec.name, version = spec.version } }, { confirm = false })
     added[name] = true
   end
   if spec.config then
@@ -178,7 +207,7 @@ function M.setup()
         end
       end
       if #pending > 0 then
-        vim.pack.add(pending, { load = false, confirm = false })
+        queue(pending, { load = false, confirm = false })
       end
     end,
   })

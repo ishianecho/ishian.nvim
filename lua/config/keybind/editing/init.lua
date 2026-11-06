@@ -2,6 +2,7 @@ local database = require("config.keybind.editing.database")
 database.setup()
 
 return {
+  require("config.keybind.editing.claude"),
   require("config.keybind.editing.codemap"),
   require("config.keybind.editing.explorer"),
   require("config.keybind.editing.git"),

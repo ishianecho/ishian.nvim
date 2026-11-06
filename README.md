@@ -110,6 +110,7 @@ Personal Neovim configuration: managed with the built-in `vim.pack`, Lua-only. S
 | Feature | Plugin |
 | --- | --- |
 | Autopairs | nvim-autopairs |
+| AI assistant | claudecode.nvim |
 | Search & replace | grug-far.nvim |
 | Surround | mini.surround |
 | Markdown rendering | render-markdown.nvim |

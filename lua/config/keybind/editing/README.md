@@ -2,6 +2,22 @@
 
 Pickers, explorer, search & replace, git, and misc editing tools.
 
+## `claude`
+
+Active when claudecode.nvim is installed.
+
+| Key | Mode | Description |
+| --- | --- | --- |
+| `<leader>ac` | n | Toggle Claude |
+| `<leader>af` | n | Focus Claude |
+| `<leader>ar` | n | Resume Claude |
+| `<leader>aC` | n | Continue Claude |
+| `<leader>am` | n | Select Claude model |
+| `<leader>ab` | n | Add current buffer |
+| `<leader>as` | x | Send to Claude |
+| `<leader>aa` | n | Accept diff |
+| `<leader>ad` | n | Deny diff |
+
 ## `codemap`
 
 | Key | Mode | Description |

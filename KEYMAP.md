@@ -22,6 +22,7 @@ Per-directory references with full key tables:
 | `langs/code-action.lua` | `<leader>c*` | code actions, rename |
 | `langs/complete.lua` | `<Tab>` `<C-k>` `<C-j>` `<C-y>` | completion (reference only) |
 | `langs/diagnostic.lua` | `[e` `]e` `[w` `]w`, `gk`, `gQ` `gL` | diagnostics / quickfix / loclist |
+| `editing/claude.lua` | `<leader>a*` | claude code (toggle, focus, send, diff) |
 | `editing/explorer.lua` | `<C-e>` | neo-tree (n/x/i/t) |
 | `editing/picker/find.lua` | `<leader><space>`, `<leader>/`, `<leader>:`, `<leader>,`, `<leader>f*` | files, grep, history, buffers |
 | `editing/picker/search.lua` | `<leader>s*` | grep/diagnostics/marks/jumps/… (fzf-lua) |
