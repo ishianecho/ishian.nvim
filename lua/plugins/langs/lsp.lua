@@ -1,12 +1,11 @@
 return {
   {
     src = "https://github.com/neovim/nvim-lspconfig",
-    dependencies = { "mason.nvim", "sqls.nvim" },
+    dependencies = { "sqls.nvim" },
     config = function()
       require("config.langs.lsp.init").setup()
     end,
   },
-  { src = "https://github.com/mason-org/mason.nvim" },
   { src = "https://github.com/nanotee/sqls.nvim" },
   {
     src = "https://github.com/fatih/vim-go",

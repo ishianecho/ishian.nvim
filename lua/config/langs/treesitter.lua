@@ -70,7 +70,6 @@ local local_filetypes = {
 }
 
 function M.setup()
-  local powershell = require("config.langs.lsp.powershell")
   local autocmd = _G.UserUtils.autocmd
   local treesitter = require("nvim-treesitter")
   local pending = {}
@@ -78,7 +77,7 @@ function M.setup()
   vim.filetype.add(local_filetypes)
 
   local filetypes = vim.tbl_filter(function(filetype)
-    return filetype ~= "powershell" or powershell.is_available()
+    return filetype ~= "powershell" or vim.fn.executable("pwsh") == 1
   end, M.fts)
 
   autocmd("FileType", {

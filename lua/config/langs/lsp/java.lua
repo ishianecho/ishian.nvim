@@ -36,10 +36,6 @@ local function resolve_java_runtimes()
   }
 end
 
-local function glob_jars(pattern)
-  return vim.split(vim.fn.glob(pattern), "\n", { trimempty = true })
-end
-
 local function resolve_jdtls_java_home()
   local best
   local installs = vim.fn.glob(vim.fn.expand("~/.local/share/mise/installs/java/*"), false, true)
@@ -55,9 +51,6 @@ local function resolve_jdtls_java_home()
 end
 
 function M.setup()
-  local mason_share = vim.fn.stdpath("data") .. "/mason/share"
-  local bundles = {}
-  vim.list_extend(bundles, glob_jars(mason_share .. "/java-test/*.jar"))
   local jdtls_java_home = resolve_jdtls_java_home()
 
   vim.lsp.config("jdtls", {
@@ -87,7 +80,7 @@ function M.setup()
       },
     },
     init_options = {
-      bundles = bundles,
+      extendedClientCapabilities = require("jdtls").extendedClientCapabilities,
       workspace = {
         didChangeWatchedFiles = {
           dynamicRegistration = true,
@@ -96,7 +89,6 @@ function M.setup()
           enabled = true,
         },
       },
-      extendedClientCapabilities = require("jdtls").extendedClientCapabilities,
     },
   })
 end

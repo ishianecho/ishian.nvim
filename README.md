@@ -31,11 +31,11 @@ Personal Neovim configuration: managed with the built-in `vim.pack`, Lua-only. S
 | Feature | Plugin |
 | --- | --- |
 | Completion | blink.cmp |
-| LSP | nvim-lspconfig + mason.nvim |
+| LSP | nvim-lspconfig + vim.lsp |
 | Lint | nvim-lint |
 | Format | conform.nvim |
 | Treesitter | nvim-treesitter |
-| Java | nvim-jdtls |
+| Java | jdtls + nvim-jdtls |
 | Go | vim-go |
 | Helm | helm-ls.nvim |
 | SQL | sqls.nvim |
@@ -61,7 +61,6 @@ Personal Neovim configuration: managed with the built-in `vim.pack`, Lua-only. S
 | YAML | yamlls |
 | XML | lemminx |
 | Protobuf | buf_ls |
-| PowerShell | powershell_es |
 | Typos | typos_lsp |
 
 ### Linters
