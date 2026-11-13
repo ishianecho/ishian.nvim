@@ -7,6 +7,7 @@ function M.setup()
     capabilities = conf.capabilities,
     filetypes = {
       "xml",
+      "mybatis",
       "xsd",
       "xsl",
       "xslt",

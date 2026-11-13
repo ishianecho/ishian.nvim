@@ -67,16 +67,9 @@ function M.setup()
           "snippets",
           "buffer",
         }
-        if pcall(require, "nvim-mybatis.completion.blink") then
-          table.insert(sources, "mybatis")
-        end
         return sources
       end,
       providers = {
-        mybatis = {
-          name = "Mybatis",
-          module = "nvim-mybatis.completion.blink",
-        },
         snippets = {
           opts = {
             friendly_snippets = has_friendly_snippets,

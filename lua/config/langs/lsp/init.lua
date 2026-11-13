@@ -174,7 +174,7 @@ local custom_confs = {
       {
         name = "lemminx",
         cmd = "lemminx",
-        filetypes = { "xml", "xsd", "xsl", "xslt", "svg" },
+        filetypes = { "xml", "mybatis", "xsd", "xsl", "xslt", "svg" },
       },
     },
   },
