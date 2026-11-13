@@ -33,7 +33,6 @@ return {
   },
   {
     src = "https://github.com/ishianecho/nvim-mybatis",
-    enabled = false,
     config = function()
       require("nvim-mybatis").setup({})
     end,
