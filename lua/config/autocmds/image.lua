@@ -12,6 +12,11 @@ local function hide(win)
   end
   images[win] = nil
   vim.ui.img.del(entry.id)
+  if vim.api.nvim_win_is_valid(win) then
+    for opt, value in pairs(entry.saved) do
+      vim.wo[win][opt] = value
+    end
+  end
 end
 
 local function prune()
@@ -74,15 +79,19 @@ local function show(win)
   vim.api.nvim_buf_set_lines(buf, 0, -1, false, {})
   vim.bo[buf].modified = false
   vim.bo[buf].modifiable = false
+  local saved = {}
   if is_file then
     vim.bo[buf].readonly = true
+    for _, opt in ipairs({ "number", "relativenumber", "signcolumn", "foldcolumn" }) do
+      saved[opt] = vim.wo[win][opt]
+    end
     vim.wo[win].number = false
     vim.wo[win].relativenumber = false
     vim.wo[win].signcolumn = "no"
     vim.wo[win].foldcolumn = "0"
   end
 
-  images[win] = { id = vim.ui.img.set(data, opts), bias = not is_file }
+  images[win] = { id = vim.ui.img.set(data, opts), bias = not is_file, saved = saved }
 end
 
 function M.setup()
