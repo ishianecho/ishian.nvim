@@ -4,6 +4,7 @@ local CELL_WIDTH = 10
 local CELL_HEIGHT = 20
 
 local images = {}
+local enabled = false
 
 local function hide(win)
   local entry = images[win]
@@ -12,11 +13,6 @@ local function hide(win)
   end
   images[win] = nil
   vim.ui.img.del(entry.id)
-  if vim.api.nvim_win_is_valid(win) then
-    for opt, value in pairs(entry.saved) do
-      vim.wo[win][opt] = value
-    end
-  end
 end
 
 local function prune()
@@ -79,25 +75,34 @@ local function show(win)
   vim.api.nvim_buf_set_lines(buf, 0, -1, false, {})
   vim.bo[buf].modified = false
   vim.bo[buf].modifiable = false
-  local saved = {}
-  if is_file then
-    vim.bo[buf].readonly = true
-    for _, opt in ipairs({ "number", "relativenumber", "signcolumn", "foldcolumn" }) do
-      saved[opt] = vim.wo[win][opt]
-    end
+  if vim.api.nvim_win_get_config(win).relative ~= "" then
     vim.wo[win].number = false
     vim.wo[win].relativenumber = false
     vim.wo[win].signcolumn = "no"
     vim.wo[win].foldcolumn = "0"
+  elseif is_file then
+    vim.bo[buf].readonly = true
   end
 
-  images[win] = { id = vim.ui.img.set(data, opts), bias = not is_file, saved = saved }
+  images[win] = { id = vim.ui.img.set(data, opts), bias = not is_file }
+end
+
+function M.reconcile(win)
+  if not enabled or not vim.api.nvim_win_is_valid(win) then
+    return
+  end
+  if vim.bo[vim.api.nvim_win_get_buf(win)].filetype:match("^image%.") then
+    show(win)
+  else
+    hide(win)
+  end
 end
 
 function M.setup()
   if not vim.env.KITTY_WINDOW_ID then
     return
   end
+  enabled = true
 
   local autocmd = _G.UserUtils.autocmd
 

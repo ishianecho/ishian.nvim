@@ -9,7 +9,6 @@ local sources = {
   "plugins.editing.claude",
   "plugins.editing.grug-far",
   "plugins.editing.pairs",
-  "plugins.editing.remote",
   "plugins.ui.colortheme",
   "plugins.ui.fzf",
   "plugins.ui.neotree",
